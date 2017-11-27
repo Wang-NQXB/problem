@@ -129,38 +129,36 @@ const trap = height => {
  */
 class LRUCache {
   constructor(capacity) {
-    var that = this
-
-    that.props = []
-    that.data = new Proxy({}, {
+    var props = []
+    this.data = new Proxy({}, {
       get(target, key, receiver) {
         key = key + ''
-        var index = that.props.indexOf(key)
+        var index = props.indexOf(key)
 
         if (index === -1) {
           return -1
         }
 
         if (index > 0) {
-          that.props.splice(index, 1)
-          that.props.unshift(key)
+          props.splice(index, 1)
+          props.unshift(key)
         }
 
         return Reflect.get(target, key, receiver);
       },
       set(target, key, value, receiver) {
         key = key + ''
-        var index = that.props.indexOf(key)
+        var index = props.indexOf(key)
 
         if (index > 0) {
-          that.props.splice(index, 1)
-          that.props.unshift(key)
+          props.splice(index, 1)
+          props.unshift(key)
         }
 
         if (index === -1) {
-          that.props.unshift(key)
-          if (that.props.length > capacity) {
-            delete  target[that.props.pop()]
+          props.unshift(key)
+          if (props.length > capacity) {
+            delete  target[props.pop()]
           }
         }
 
