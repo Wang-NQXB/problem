@@ -219,7 +219,6 @@ const longestConsecutive = nums => {
  * @param target
  * @returns {[null,null]}
  */
-
 const twoSum = (nums, target) => {
   var i, temp
   var len = nums.length
