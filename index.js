@@ -208,3 +208,32 @@ const longestConsecutive = nums => {
 
   return Math.max.apply(null, resArr)
 }
+
+/**
+ * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+ *
+ * You may assume that each input would have exactly one solution, and you may not use the same element twice.
+ *
+ * https://leetcode.com/problems/two-sum/description/
+ * @param nums
+ * @param target
+ * @returns {[null,null]}
+ */
+
+const twoSum = (nums, target) => {
+  var i, temp
+  var len = nums.length
+  var cache = {}
+
+  for (i = 0; i < len; i++) {
+    cache[nums[i]] = i
+  }
+
+  for (i = 0; i < len; i++) {
+    temp = cache[target - nums[i]]
+
+    if (temp && temp !== i) {
+      return [i, temp]
+    }
+  }
+}
