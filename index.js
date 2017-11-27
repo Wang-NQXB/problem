@@ -175,3 +175,25 @@ class LRUCache {
     this.data[key] = value
   }
 }
+
+const longestConsecutive = nums => {
+  nums.sort((a, b) => a - b)
+
+  var resArr = [0]
+  var temp = 1
+
+  for (var i = 0, len = nums.length; i < len; i++) {
+    switch (nums[i + 1] - nums[i]) {
+      case 0:
+        break;
+      case 1:
+        temp++
+        break;
+      default:
+        resArr.push(temp)
+        temp = 1
+    }
+  }
+
+  return Math.max.apply(null, resArr)
+}
