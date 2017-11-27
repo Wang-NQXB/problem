@@ -133,9 +133,13 @@ class LRUCache {
 
     that.props = []
     that.data = new Proxy({}, {
-      get: function (target, key, receiver) {
+      get(target, key, receiver) {
         key = key + ''
         var index = that.props.indexOf(key)
+
+        if (index === -1) {
+          return -1
+        }
 
         if (index > 0) {
           that.props.splice(index, 1)
@@ -144,7 +148,7 @@ class LRUCache {
 
         return Reflect.get(target, key, receiver);
       },
-      set: function (target, key, value, receiver) {
+      set(target, key, value, receiver) {
         key = key + ''
         var index = that.props.indexOf(key)
 
@@ -166,7 +170,7 @@ class LRUCache {
   }
 
   get(key) {
-    return this.data[key] || -1
+    return this.data[key]
   }
 
   put(key, value) {
